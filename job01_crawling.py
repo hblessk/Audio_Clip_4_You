@@ -1,4 +1,4 @@
-#자연어기반 영화추천시스템 #3차 팀프로젝트
+#자연어기반 오디오 소설 추천시스템
 from selenium import webdriver
 import pandas as pd
 from selenium.common.exceptions import NoSuchElementException
