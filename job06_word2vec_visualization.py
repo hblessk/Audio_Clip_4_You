@@ -8,29 +8,29 @@ import matplotlib as mpl
 font_path ='./malgun.ttf'
 font_name = font_manager.FontProperties(fname=font_path).get_name()
 mpl.rcParams['axes.unicode_minus']=False
-rc('font', family=font_name )
+rc('font', family=font_name)
 
 embedding_model = Word2Vec.load('./models/word2vec_audio_clip_inform.model') # 학습된 모델 안에 있는 단어를 보여줌
-key_word = '인생'
+key_word = '감정'
 sim_words = embedding_model.wv.most_similar(key_word, topn=10)   # topn=10 10개 단어만/ 여름이라는 단어와 비슷한 단어가 있는지
 print(sim_words)     # most_similar 의미공간 사이에 비슷한 위치에 있는 단어 출력
 
 vectors = []
 labels = []
 
-for label, _ in sim_words:
-    labels.append(label)
-    vectors.append(embedding_model.wv[label])
-print(vectors[0])
-print(len(vectors[0]))
+for label, _ in sim_words:          # 키워드 넣은 것과 유사도
+    labels.append(label)            # 지연,,,등과 같은 유사한 키워드를 저장
+    vectors.append(embedding_model.wv[label])   # 그 벡터 좌표값을 벡터스라는 빈리스트에 저장
+print(vectors[0])                   # 0번째 프린트
+print(len(vectors[0]))              # 0번째 길이 프린트 해본거
 
 df_vector = pd.DataFrame(vectors)
 print(df_vector)
 
 tsne_model = TSNE(perplexity=40, n_components=2, init='pca', n_iter=2500)
-new_value = tsne_model.fit_transform(df_vector)
+new_value = tsne_model.fit_transform(df_vector)     # TSNE 전용으로 뉴밸류를 맞춤?    # df벡터
 df_xy = pd.DataFrame({'words':labels, 'x':new_value[:, 0], 'y':new_value[:, 1]})
-df_xy.loc[len(df_xy)] = (key_word, 0, 0)    #
+df_xy.loc[len(df_xy)] = (key_word, 0, 0)
 print(df_xy)
 
 plt.figure(figsize=(8, 8))

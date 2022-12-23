@@ -14,6 +14,7 @@ from selenium.common.exceptions import NoSuchElementException, StaleElementRefer
 # 1. 상세>제목             //*[@id="content"]/div/section/div[1]/div[2]/h3                          => title_xpath
 # 2. 상세>저자             //*[@id="content"]/div/section/div[1]/div[3]/div[1]/span[1]/text()[1]    => author_xpath
 # 3. 상세>오디오북 정보     //*[@id="audiobook"]/div[1]/p      #/text()                              => inform_xpath
+# 4. 링크 => clip_link_xpath
 
 # url = 'https://audioclip.naver.com/audiobook-categories/3/audiobooks'
 
@@ -47,7 +48,7 @@ while True:  # 무한스크롤 루프
 
 
 # for i in range(1, 2747):
-for j in range(2591, 2601):  # 총 오디오북 2747권/ 1-900까지
+for j in range(1681, 1701):  # 총 오디오북 2747권/ 1001~2000까지    1051    1091
 
     clip_link_xpath = '//*[@id="content"]/div/section/div/div/div[3]/div/div/div[{}]/a'.format(j)
     # title_button_xpath = '//*[@id="content"]/div/section/div/div/div[3]/div/div/div[{}]/a/div[2]'.format(j)  # 각각 제목 들어가는 버튼
